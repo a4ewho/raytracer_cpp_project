@@ -9,6 +9,7 @@ add_executable(raytracer
         src/main.cpp
         src/core/Vector3.cpp
         src/core/Ray.cpp
+        src/figures/Sphere.cpp
 )
 
 target_include_directories(raytracer PRIVATE src)
