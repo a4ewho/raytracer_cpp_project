@@ -1,0 +1,22 @@
+# Сборка
+build/
+cmake-build-*/
+*.o
+*.obj
+*.exe
+*.out
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Результаты рендеринга
+*.png
+*.bmp
+output.png
+
+# Системные файлы
+.DS_Store
+Thumbs.db
