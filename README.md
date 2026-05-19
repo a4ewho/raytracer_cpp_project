@@ -11,7 +11,7 @@
 
 ## Репозиторий
 
-`[https://github.com/a4ewho/project-python](https://github.com/a4ewho/raytracer_cpp_project)`
+[https://github.com/a4ewho/project-python](https://github.com/a4ewho/raytracer_cpp_project)
 
 ## Преподаватель
 
