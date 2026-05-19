@@ -7,6 +7,7 @@
 ## Участники
 
 Нечаева Дарья, Б05-503
+
 Забнева Валерия, Б05-503
 
 ## Репозиторий
@@ -19,7 +20,7 @@
 
 ## Сборка
 
-mkdir build
+`mkdir build
 cd build
 cmake ..
-cmake --build .
+cmake --build .`
