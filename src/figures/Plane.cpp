@@ -3,10 +3,10 @@
 
 const double EPSILON = 1e-6;
 
-Plane::Plane() : m_point(), m_normal(0, 1, 0) {}
+Plane::Plane() : m_point(), m_normal(0, 1, 0), m_material() {}
 
-Plane::Plane(const Vector3& point, const Vector3& normal)
-    : m_point(point), m_normal(normal.normalized()) {}
+Plane::Plane(const Vector3& point, const Vector3& normal, const Material& material)
+    : m_point(point), m_normal(normal.normalized()), m_material(material) {}
 
 std::optional<HitRecord> Plane::hit(const Ray& ray) const {
     double denom = dot(ray.direction(), m_normal);

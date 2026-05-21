@@ -2,10 +2,10 @@
 #include <cmath>
 #include <algorithm>
 
-Sphere::Sphere() : m_center(), m_radius(1.0) {}
+Sphere::Sphere() : m_center(), m_radius(1.0), m_material() {}
 
-Sphere::Sphere(const Vector3& center, double radius)
-    : m_center(center), m_radius(radius) {}
+Sphere::Sphere(const Vector3& center, double radius, const Material& material)
+    : m_center(center), m_radius(radius), m_material(material) {}
 
 std::optional<HitRecord> Sphere::hit(const Ray& ray) const {
     // вектор от центра сферы до начала луча

@@ -80,6 +80,10 @@ Vector3 operator*(double scalar, const Vector3& v) {
     return v * scalar;
 }
 
+Vector3 operator*(const Vector3& a, const Vector3& b) {
+    return Vector3(a.x() * b.x(), a.y() * b.y(), a.z() * b.z());
+}
+
 Vector3 operator/(const Vector3& v, double scalar) {
     return v * (1.0 / scalar);
 }
