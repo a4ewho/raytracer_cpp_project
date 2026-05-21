@@ -11,6 +11,7 @@ add_executable(raytracer
         src/core/Ray.cpp
         src/figures/Sphere.cpp
         src/figures/Plane.cpp
+        src/Material.cpp
 )
 
 target_include_directories(raytracer PRIVATE src)

@@ -3,6 +3,7 @@
 #include "core/Ray.h"
 #include "figures/Sphere.h"
 #include "figures/Plane.h"
+#include "Material.h"
 
 int main() {
     std::cout << "========== SPHERE TESTS ==========" << std::endl;
@@ -50,6 +51,7 @@ int main() {
         std::cout << "\nRay from INSIDE: no hit (should hit back face)" << std::endl;
     }
 
+
     std::cout << "\n========== PLANE TESTS ==========" << std::endl;
 
     // Плоскость на y = -1, нормаль вверх
@@ -87,6 +89,82 @@ int main() {
     if (!hit6) {
         std::cout << "\nRay (0,0,0) -> (1,0,0) MISSES (parallel)" << std::endl;
     }
+
+
+    std::cout << "\n========== MATERIAL TESTS ==========" << std::endl;
+
+    // Тест 1: Конструктор по умолчанию
+    Material defaultMat;
+    std::cout << "Default material:" << std::endl;
+    std::cout << "  name: " << defaultMat.name() << std::endl;
+    std::cout << "  color: " << defaultMat.color() << std::endl;
+    std::cout << "  Ka: " << defaultMat.ka() << std::endl;
+    std::cout << "  Kd: " << defaultMat.kd() << std::endl;
+    std::cout << "  Ks: " << defaultMat.ks() << std::endl;
+    std::cout << "  shininess: " << defaultMat.shininess() << std::endl;
+
+    // Тест 2: Пользовательский материал (красный)
+    Material redMat("red", Vector3(1.0, 0.2, 0.2), 0.2, 0.7, 0.5, 32);
+    std::cout << "\nRed material:" << std::endl;
+    std::cout << "  name: " << redMat.name() << std::endl;
+    std::cout << "  color: " << redMat.color() << std::endl;
+    std::cout << "  Ka: " << redMat.ka() << std::endl;
+    std::cout << "  Kd: " << redMat.kd() << std::endl;
+    std::cout << "  Ks: " << redMat.ks() << std::endl;
+    std::cout << "  shininess: " << redMat.shininess() << std::endl;
+
+    // Тест 3: Материал как металл
+    Material metalMat("metal", Vector3(0.9, 0.9, 0.9), 0.2, 0.4, 0.9, 128);
+    std::cout << "\nMetal material:" << std::endl;
+    std::cout << "  name: " << metalMat.name() << std::endl;
+    std::cout << "  color: " << metalMat.color() << std::endl;
+    std::cout << "  Ka: " << metalMat.ka() << std::endl;
+    std::cout << "  Kd: " << metalMat.kd() << std::endl;
+    std::cout << "  Ks: " << metalMat.ks() << std::endl;
+    std::cout << "  shininess: " << metalMat.shininess() << std::endl;
+
+    // Тест 4: Матовый материал
+    Material matteMat("matte", Vector3(0.8, 0.8, 0.8), 0.3, 0.9, 0.1, 8);
+    std::cout << "\nMatte material:" << std::endl;
+    std::cout << "  name: " << matteMat.name() << std::endl;
+    std::cout << "  color: " << matteMat.color() << std::endl;
+    std::cout << "  Ka: " << matteMat.ka() << std::endl;
+    std::cout << "  Kd: " << matteMat.kd() << std::endl;
+    std::cout << "  Ks: " << matteMat.ks() << std::endl;
+    std::cout << "  shininess: " << matteMat.shininess() << std::endl;
+
+
+    std::cout << "\n========== SPHERE WITH MATERIAL TESTS ==========" << std::endl;
+
+    // Сфера с материалом по умолчанию
+    Sphere defaultSphere(Vector3(0, 0, -5), 1.0);
+    std::cout << "Sphere with default material:" << std::endl;
+    std::cout << "  material name: " << defaultSphere.material().name() << std::endl;
+    std::cout << "  material color: " << defaultSphere.material().color() << std::endl;
+
+    // Сфера с красным материалом
+    Sphere redSphere(Vector3(1, 0, -4), 0.8, redMat);
+    std::cout << "\nSphere with red material:" << std::endl;
+    std::cout << "  material name: " << redSphere.material().name() << std::endl;
+    std::cout << "  material color: " << redSphere.material().color() << std::endl;
+
+    // Сфера с металлическим материалом
+    Sphere metalSphere(Vector3(-1, 0, -4.5), 0.9, metalMat);
+    std::cout << "\nSphere with metal material:" << std::endl;
+    std::cout << "  material name: " << metalSphere.material().name() << std::endl;
+    std::cout << "  material color: " << metalSphere.material().color() << std::endl;
+
+
+    std::cout << "\n========== PLANE WITH MATERIAL TESTS ==========" << std::endl;
+
+    // Плоскость с матовым материалом
+    Plane mattePlane(Vector3(0, -1, 0), Vector3(0, 1, 0), matteMat);
+    std::cout << "Plane with matte material:" << std::endl;
+    std::cout << "  material name: " << mattePlane.material().name() << std::endl;
+    std::cout << "  material color: " << mattePlane.material().color() << std::endl;
+    std::cout << "  Ka: " << mattePlane.material().ka() << std::endl;
+    std::cout << "  Kd: " << mattePlane.material().kd() << std::endl;
+    std::cout << "  Ks: " << mattePlane.material().ks() << std::endl;
 
     return 0;
 }

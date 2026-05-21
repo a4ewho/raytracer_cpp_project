@@ -4,6 +4,7 @@
 #include <optional>
 #include "../core/Vector3.h"
 #include "../core/Ray.h"
+#include "../Material.h"
 
 // структура для хранения информации о пересечении
 struct HitRecord {
@@ -22,6 +23,9 @@ public:
     
     // получить имя фигуры (для отладки)
     virtual std::string name() const = 0;
+
+    // материал
+    virtual Material material() const = 0;
 };
 
 #endif // FIGURE_HPP
