@@ -2,7 +2,7 @@
 #define MATERIAL_H
 
 #include <string>
-#include "core/Vector3.h"
+#include "../core/Vector3.h"
 
 class Material {
 public:

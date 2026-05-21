@@ -4,7 +4,7 @@
 #include <optional>
 #include "../core/Vector3.h"
 #include "../core/Ray.h"
-#include "../Material.h"
+#include "../Materials/Material.h"
 
 // структура для хранения информации о пересечении
 struct HitRecord {

@@ -45,6 +45,7 @@ Vector3 operator+(const Vector3& a, const Vector3& b);
 Vector3 operator-(const Vector3& a, const Vector3& b);
 Vector3 operator*(const Vector3& v, double scalar);
 Vector3 operator*(double scalar, const Vector3& v);
+Vector3 operator*(const Vector3& a, const Vector3& b);
 Vector3 operator/(const Vector3& v, double scalar);
 
 // скалярное произведение
