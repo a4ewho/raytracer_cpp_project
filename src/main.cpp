@@ -1,11 +1,15 @@
 #include <iostream>
+#include <memory>
 #include "core/Vector3.h"
 #include "core/Ray.h"
 #include "figures/Sphere.h"
 #include "figures/Plane.h"
 #include "Material.h"
+#include "Light.h"
+#include "Scene.h"
 
 int main() {
+    /*
     std::cout << "========== SPHERE TESTS ==========" << std::endl;
 
     // Создаём сферу с центром в (0,0,-5) и радиусом 1
@@ -165,6 +169,83 @@ int main() {
     std::cout << "  Ka: " << mattePlane.material().ka() << std::endl;
     std::cout << "  Kd: " << mattePlane.material().kd() << std::endl;
     std::cout << "  Ks: " << mattePlane.material().ks() << std::endl;
+
+
+    std::cout << "\n========== LIGHT TESTS ==========" << std::endl;
+
+    // Тест 1: Источник по умолчанию
+    Light defaultLight;
+    std::cout << "Default light:" << std::endl;
+    std::cout << "  name: " << defaultLight.name() << std::endl;
+    std::cout << "  position: " << defaultLight.position() << std::endl;
+    std::cout << "  intensity: " << defaultLight.intensity() << std::endl;
+    std::cout << "  color: " << defaultLight.color() << std::endl;
+
+    // Тест 2: Яркий белый свет сверху
+    Light sun("sun", Vector3(0, 5, -2), 1.8, Vector3(1.0, 0.95, 0.9));
+    std::cout << "\nSun light:" << std::endl;
+    std::cout << "  name: " << sun.name() << std::endl;
+    std::cout << "  position: " << sun.position() << std::endl;
+    std::cout << "  intensity: " << sun.intensity() << std::endl;
+    std::cout << "  color: " << sun.color() << std::endl;
+
+    // Тест 3: Слабый синий свет снизу
+    Light fill("fill", Vector3(0, -1, 0), 0.4, Vector3(0.8, 0.9, 1.0));
+    std::cout << "\nFill light:" << std::endl;
+    std::cout << "  name: " << fill.name() << std::endl;
+    std::cout << "  position: " << fill.position() << std::endl;
+    std::cout << "  intensity: " << fill.intensity() << std::endl;
+    std::cout << "  color: " << fill.color() << std::endl;
+    */
+
+    // ========== ТЕСТЫ SCENE ==========
+    std::cout << "\n========== SCENE TESTS ==========" << std::endl;
+
+    // Создаём сцену
+    Scene scene(800, 600);
+    scene.setBackgroundColor(Vector3(0.2, 0.3, 0.5));
+
+    std::cout << "Scene size: " << scene.width() << " x " << scene.height() << std::endl;
+    std::cout << "Background color: " << scene.backgroundColor() << std::endl;
+    std::cout << "Initial figures count: " << scene.figures().size() << std::endl;
+    std::cout << "Initial lights count: " << scene.lights().size() << std::endl;
+
+    // Создаём материалы
+    Material redMat("red", Vector3(1.0, 0.2, 0.2), 0.2, 0.7, 0.5, 32);
+    Material blueMat("blue", Vector3(0.2, 0.3, 1.0), 0.2, 0.7, 0.5, 32);
+    Material greenMat("green", Vector3(0.2, 1.0, 0.2), 0.2, 0.7, 0.5, 32);
+
+    // Добавляем фигуры
+    auto sphere1 = std::make_shared<Sphere>(Vector3(-1.5, 0, -5), 1.0, redMat);
+    auto sphere2 = std::make_shared<Sphere>(Vector3(1.5, 0, -5), 1.0, blueMat);
+    auto plane = std::make_shared<Plane>(Vector3(0, -1.5, 0), Vector3(0, 1, 0), greenMat);
+
+    scene.addFigure(sphere1);
+    scene.addFigure(sphere2);
+    scene.addFigure(plane);
+
+    std::cout << "\nAfter adding figures: " << scene.figures().size() << std::endl;
+
+    // Добавляем источники света
+    Light sun("sun", Vector3(0, 5, -2), 1.5, Vector3(1, 1, 1));
+    Light fill("fill", Vector3(0, -1, 0), 0.3, Vector3(0.8, 0.9, 1.0));
+
+    scene.addLight(sun);
+    scene.addLight(fill);
+
+    std::cout << "After adding lights: " << scene.lights().size() << std::endl;
+
+    // Проверяем содержимое сцены
+    std::cout << "\nScene contents:" << std::endl;
+    for (const auto& figure : scene.figures()) {
+        std::cout << "  Figure: " << figure->name()
+                  << ", material: " << figure->material().name() << std::endl;
+    }
+
+    for (const auto& light : scene.lights()) {
+        std::cout << "  Light: " << light.name()
+                  << ", position: " << light.position() << std::endl;
+    }
 
     return 0;
 }
